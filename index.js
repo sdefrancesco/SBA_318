@@ -1,9 +1,13 @@
 // modules
 const express = require('express')
+const path = require('path')
+
 const app = express()
 // express options
 app.set('views', './views')
 app.set('view engine', 'hbs')
+// serve static files in public directory like css and images
+app.use(express.static(path.join(__dirname, 'public')))
 
 // routes
 app.get('/', (req, res)=> {
