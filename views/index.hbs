@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/style.css">
     <title>SBA 318</title>
 </head>
 <body>
-    <h1>SBA 318</h1>
-    {{cars.length}}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand" href="#">SBA 318</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="container">
+        <br>
+        <div class="rounded border shadow-lg mb-4 p-5 text-center bg-body-tertiary">
+            <h2>SBA 318.1</h2>
+            <h6>By Sebastian DeFrancesco</h6>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h6>Posts ({{posts.length}})</h6>
+                {{#each posts}}
+                    <div class="card mb-3 bg-body-tertiary">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{title}}
+                            </h5>
+                            <p>
+                                {{content}}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="" class="btn btn-danger btn-sm float-end">Delete Post</a>
+                        </div>
+                    </div>
+                {{/each}}
+                
+            </div>
+            <div class="col-md-4">
+                <section>
+                    <h6>Users</h6>
+                    {{#each users}}
+                        <div class="card mb-4 bg-body-tertiary shadow-lg">
+                            <div class="card-body">
+                                <h6 class="text-capitalize">{{name}}</h6>
+                                <small class="text-body-secondary">DOB: {{dob}}</small>
+                            </div>
+                        </div>
+                    {{/each}}
+                </section>
+            </div>
+        </div>
+        <section>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>

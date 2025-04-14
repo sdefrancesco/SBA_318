@@ -3,7 +3,7 @@ const express = require('express')
 const path = require('path')
 
 // data
-const cars = require('./data')
+const data = require('./data')
 
 const app = express()
 
@@ -16,9 +16,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 // routes
 app.get('/', (req, res) => {
     res.render('index.hbs', {
-        cars: cars
+        users: data.users,
+        posts: data.posts
     })
 })
+
+// 
+// app.post('/posts/new')
 
 
 // express server
