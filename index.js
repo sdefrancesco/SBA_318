@@ -53,11 +53,11 @@ app.get('/', (req, res) => {
         }
     }
     
+  
     // render the view with filtered posts
     res.render('index.hbs', {
         users: data.users,
         posts: filteredPosts,
-        errors: res.locals.errors
     });
 });
 

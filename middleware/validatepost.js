@@ -14,10 +14,12 @@ module.exports = {
             errors.push('Post content cannot be empty.');
         }
 
+        // If there are any errors, send a 400 response with the errors
         if (errors.length > 0) {
-            res.locals.errors = errors;
+            console.log(errors)
         }
 
+        // If no errors, proceed to the next middleware or route handler
         next();
     }
 };
