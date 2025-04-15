@@ -2,6 +2,8 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const axios = require('axios')
+
 
 // data
 const data = require('./data')
@@ -16,7 +18,8 @@ app.set('view engine', 'hbs')
 app.use(express.static(path.join(__dirname, 'public')))
 
 // parse body data from form for post, and put requests
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.json())
 
 // routes
 app.get('/', (req, res) => {
@@ -50,6 +53,27 @@ app.get('/', (req, res) => {
     });
 });
 
+
+
+app.put('/posts/:id', (req, res) => {
+    const { title, content } = req.body; 
+    const postId = req.params.id;  
+
+    // find the post by its ID
+    const post = data.posts.find(post => post.id == postId);
+
+    if (post) {
+        // update the post's title and content
+        post.title = title;
+        post.content = content;
+
+        // return a success response
+        res.status(200).json({ message: 'Post updated successfully', post });
+    } else {
+        // if the post was not found
+        res.status(404).json({ message: 'Post not found' });
+    }
+});
 
 app.post('/users/new', (req, res)=> {
     console.log(req.body)
