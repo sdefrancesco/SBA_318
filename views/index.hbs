@@ -56,6 +56,15 @@
                     </div>
                 </form>
                 <br>
+    {{#if errors}}
+        <div class="alert alert-danger">
+            <ul>
+                {{#each errors}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
                 <h6>Posts ({{posts.length}})</h6>
                 {{#each posts}}
                 <div class="card mb-3 bg-body-tertiary">
@@ -81,34 +90,38 @@
                         </form>
                     </div>
                 </div>
-<div class="modal" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="editPostForm">
-          <div class="mb-3">
-            <label for="postTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="postTitle" name="title" required>
-          </div>
-          <div class="mb-3">
-            <label for="postContent" class="form-label">Content</label>
-            <textarea class="form-control" id="postContent" name="content" rows="4" required></textarea>
-          </div>
-          <!-- Hidden field for postId -->
-          <input type="hidden" id="postId">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveChangesButton">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+                <div class="modal" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="editPostForm">
+                                    <div class="mb-3">
+                                        <label for="postTitle" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="postTitle" name="title" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="postContent" class="form-label">Content</label>
+                                        <textarea class="form-control" id="postContent" name="content" rows="4"
+                                            required></textarea>
+                                    </div>
+                                    <!-- Hidden field for postId -->
+                                    <input type="hidden" id="postId">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveChangesButton">Save
+                                    changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{/each}}
 
             </div>
@@ -210,7 +223,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js" integrity="sha512-2A1+/TAny5loNGk3RBbk11FwoKXYOMfAK6R7r4CpQH7Luz4pezqEGcfphoNzB7SM4dixUoJsKkBsB6kg+dNE2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js"
+        integrity="sha512-2A1+/TAny5loNGk3RBbk11FwoKXYOMfAK6R7r4CpQH7Luz4pezqEGcfphoNzB7SM4dixUoJsKkBsB6kg+dNE2g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/main.js"></script>
 </body>
 

@@ -4,6 +4,9 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const axios = require('axios')
 
+const postsRouter = require('./routes/posts');
+const usersRouter = require('./routes/users');
+
 
 // data
 const data = require('./data')
@@ -20,6 +23,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 // parse body data from form for post, and put requests
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.json())
+
+
+app.use('/posts', postsRouter); 
+app.use('/users', usersRouter); 
 
 // routes
 app.get('/', (req, res) => {
@@ -45,64 +52,15 @@ app.get('/', (req, res) => {
             filteredPosts = filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
         }
     }
-
+    
     // render the view with filtered posts
     res.render('index.hbs', {
         users: data.users,
-        posts: filteredPosts
+        posts: filteredPosts,
+        errors: res.locals.errors
     });
 });
 
-
-
-app.put('/posts/:id', (req, res) => {
-    const { title, content } = req.body; 
-    const postId = req.params.id;  
-
-    // find the post by its ID
-    const post = data.posts.find(post => post.id == postId);
-
-    if (post) {
-        // update the post's title and content
-        post.title = title;
-        post.content = content;
-
-        // return a success response
-        res.status(200).json({ message: 'Post updated successfully', post });
-    } else {
-        // if the post was not found
-        res.status(404).json({ message: 'Post not found' });
-    }
-});
-
-app.post('/users/new', (req, res)=> {
-    console.log(req.body)
-    let newUser = { ...req.body, id : data.users.length + 1}
-    data.users.push(newUser)
-    res.redirect('/')
-})
-
-app.post('/users/:id/delete', (req, res) => {
-    const postIndex = data.users.findIndex(users => users.id == req.params.id);
-    data.users.splice(postIndex, 1);
-    res.redirect('/')
-});
-
-
-app.post('/posts/new', (req, res)=> {
-    console.log(req.body)
-    let newPost = { ...req.body, date : new Date(), id : data.posts.length + 1}
-    data.posts.push(newPost)
-    res.redirect('/')
-})
-
-// DELETE REQUEST
-app.post('/posts/:id/delete', (req, res) => {
-    const postIndex = data.posts.findIndex(post => post.id == req.params.id);
-    data.posts.splice(postIndex, 1);
-    res.redirect('/')
-    
-});
 
 
 // express server
